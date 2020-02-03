@@ -30,12 +30,28 @@ class UserController < ApplicationController
       flash[:message] = "You are not authorized to access this profile."
       redirect "/users/#{session[:user_id]}"
     else
-      # @pets = Pet.all
       @user = User.find(params[:id])
       erb :'users/show'
     end
   end
 
+  get '/users/:id/edit' do
+    if current_user.id != Integer(params[:id])
+      flash[:message] = "You are not authorized to access this profile."
+      redirect "/users/#{session[:user_id]}"
+    end
+    @pets = Pet.all
+    @user = User.find(params[:id])
+    erb :'users/edit'
+  end
+  patch '/users/:id' do
+    @user = User.find(params[:id])
+    params["user"]["pet_ids"].each do |num|
+      @pet = Pet.find(num.to_i)
+      @pet.user_id = @user.id
+    end
+    @user.update(params[:user][:name])
+  end
   post '/logout' do
     session.clear
     redirect "/"

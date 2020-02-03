@@ -1,7 +1,16 @@
+<h3>Your Pets</h3>
 <% @pets.each do |pet_obj| %>
+
+  <% if pet_obj.user_id == current_user.id%>
   <ul>
     <li>Name: <%= pet_obj.name %></li>
     <li>Age: <%= pet_obj.age %></li>
     <li>Breed: <%= pet_obj.breed%></li><br>
   </ul>
+  <% end %>
+<% end %><hr>
+
+<h3>All Pets</h3>
+<% @pets.each do |pet| %>
+  <%= pet.name %><br>
 <% end %>
