@@ -2,9 +2,9 @@ class CreateVaccinations < ActiveRecord::Migration
   def change
     create_table :vaccinations do |t|
       t.string :vacc_type
-      t.integer :shot_frequency
-      t.datetime :date_administered
-      t.boolean :shot_overdue
+      t.integer :frequency
+      t.datetime :date_given
+      t.boolean :overdue
     end
   end
 end

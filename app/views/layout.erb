@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 
-    <title>PoochLog</title>
+    <title>CompanionLog</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -17,11 +17,13 @@
     <div class="wrapper">
 
         <%= yield %>
-        <form action="/logout" method="POST">
-          <input type="submit" value="Logout">
-        </form>
+        <% if current_user %>
+          <form action="/logout" method="POST">
+            <input type="submit" value="Logout">
+          </form>
+        <% end %>
       <footer class="branding">
-        <small>&copy; 2020 <strong>PoochLog</strong></small>
+        <small>&copy; 2020 <strong>CompanionLog</strong></small>
       </footer>
     </div>
 

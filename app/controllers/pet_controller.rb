@@ -1,7 +1,14 @@
 class PetController < ApplicationController
-  post '/pets/new' do
+  get '/pets/new' do
+    erb :'pets/new'
+  end
+  
+  post '/pets/new' do # post pets
     @pet = Pet.create(params)
     @pet.user_id = current_user.id
+    if @pet.dob
+      @pet.dob.strftime("%m/%d/%Y")
+    end
     current_user.pets << @pet
     redirect "/users/#{current_user.id}" # CONNECTING USER AND PET
   end
@@ -13,11 +20,16 @@ class PetController < ApplicationController
 
   get '/pets/:id' do
     @pet = Pet.find(params[:id])
-    erb '/pets/show'
+    erb :'/pets/show'
   end
 
   get '/pets/:id/edit' do
     @pet = Pet.find(params[:id])
-    erb :'pets/show'
+    erb :'pets/edit'
+  end
+
+  patch '/pets/:id' do
+    @pet = Pet.find(params[:id])
+    @pet.update(params)
   end
 end

@@ -15,8 +15,9 @@ ActiveRecord::Schema.define(version: 20200202231429) do
 
   create_table "pets", force: :cascade do |t|
     t.string  "name"
-    t.integer "age"
+    t.date    "dob"
     t.string  "gender"
+    t.string  "species"
     t.integer "weight"
     t.string  "breed"
     t.integer "user_id"
@@ -30,9 +31,9 @@ ActiveRecord::Schema.define(version: 20200202231429) do
 
   create_table "vaccinations", force: :cascade do |t|
     t.string   "vacc_type"
-    t.integer  "shot_frequency"
-    t.datetime "date_administered"
-    t.boolean  "shot_overdue"
+    t.integer  "frequency"
+    t.datetime "date_given"
+    t.boolean  "overdue"
   end
 
 end

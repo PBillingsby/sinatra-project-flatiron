@@ -1,0 +1,10 @@
+.new-pet-box {
+  width: 35vw;
+  height: auto;
+  display: flex;
+}
+
+form input, form select {
+  margin: 1vh 0;
+  display: block;
+ }

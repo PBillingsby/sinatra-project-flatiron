@@ -1,34 +1,12 @@
-
+<link rel="stylesheet" href="/stylesheets/views.css">
 <% if flash.has?(:message) %>
   <h3><%= flash[:message] %></h3>
 <% end %>
 
 <h1>Welcome back, <%= @user.username %>!<br>
 
-<h3>Your Pets</h3>
-<% @user.pets.each do |pet_obj| %>
-  
-  <ul>
-    <li>Name: <%= pet_obj.name %><input type="checkbox" name="user[pet]" id="<%= pet_obj.id %>" value="<%= 'checked' if pet_obj.user_id == current_user.id %>"></li>
-    <li>Age: <%= pet_obj.age %></li>
-    <li>Breed: <%= pet_obj.breed%></li>
-    <form action="/pets/<%= pet_obj.id %>/edit" method="GET">
-      <input type="submit" value="Edit Pet"><br>
-    </form>
-  </ul>
-<% end %>
+<h2>Your Pets</h2>
 
-<form action="/pets/new" method="POST">
-  <label>Pet Name:</label>
-  <input type="text" name="name">
-  <label>Age:</label>
-  <input type="text" name="age">
-  <label>Breed:</label>
-  <input type="text" name="breed">
-  <label>Sex:</label>
-  <input type="text" name="gender">
-  <input type="submit" value="Add Pet">
-</form>
+<%# <% parse_pet %>
 
-<h3>Add Pet</h3>
-
+<h3>Click <a href="/pets/new">here</a> to add pet</h3>
