@@ -55,6 +55,36 @@
   </form>
 
 
+  def list_user_pets # Dynamic pet lister
+      html = ""
+      current_user.pets.each do |pet_obj|
+        pet_obj.attributes.each do |pet_attr, pet_value|
+          if pet_attr == "id" || pet_attr == "user_id"
+            nil
+          elsif pet_value.blank?
+            nil
+          else
+            html << "<li>" + "<strong>#{pet_attr.capitalize}</strong>: #{pet_value}" + "</li>"
+          end
+        end
+        html << "<form action=" + "/pets/#{pet_obj.id}" + " method=" + "GET" + ">"
+        html << "<input type=" + "submit" + " value="+ "View pet" + ">"
+        html << "</form>"
+      end
+      html
+    end
+
+new_arr.each do |k|
+          k.each do |k, v|
+            if v == "" || v == nil
+              v = "N/A"
+            end
+          end
+        end
+
+
+
+
   PUT LOGIN IN SESSION
   PUT NEW IN NEW
   

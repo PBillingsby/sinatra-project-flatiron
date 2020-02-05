@@ -27,18 +27,22 @@ class ApplicationController < Sinatra::Base
       User.find_by_id(session[:user_id])
     end
 
-    def parse_pet
-      current_user.pets.each do |pet_obj|
-        pet_obj.attributes.each do |pet_attribute, value|
-          if pet_attribute == "id" || pet_attribute == "user_id"
-            nil
-          elsif pet_attribute == "weight" && !value.blank?
-            puts "#{pet_attribute.capitalize}: #{value}"
-          elsif !value.blank?
-            puts "#{pet_attribute.capitalize}: #{value}"#Dynamic pet show
+
+
+    def list_user_pets
+      new_arr = []
+      current_user.pets.each do |obj|
+        new_arr << obj.attributes.reject {|x| x == "id" || x == "user_id"}.select {|x| x}
+        new_arr.each do |k|
+          k.each do |k, v|
+            if v == "" || v == nil
+              v = "N/A"
+            end
           end
         end
       end
-    end 
+      binding.pry
+      new_arr
+    end
   end
 end

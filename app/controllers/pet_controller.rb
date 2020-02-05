@@ -4,7 +4,8 @@ class PetController < ApplicationController
   end
   
   post '/pets/new' do # post pets
-    @pet = Pet.create(params)
+    @pet = Pet.create(params) # Can't handle
+    # @pet = Pet.new(params).save ?????
     @pet.user_id = current_user.id
     if @pet.dob
       @pet.dob.strftime("%m/%d/%Y")

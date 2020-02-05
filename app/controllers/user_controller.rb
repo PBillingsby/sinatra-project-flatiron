@@ -30,7 +30,6 @@ class UserController < ApplicationController
       flash[:message] = "You are not authorized to access this profile."
       redirect "/users/#{session[:user_id]}"
     else
-
       @user = User.find(params[:id])
       erb :'users/show'
     end

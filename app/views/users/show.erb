@@ -3,10 +3,13 @@
   <h3><%= flash[:message] %></h3>
 <% end %>
 
-<h1>Welcome back, <%= @user.username %>!<br>
+<h1>Welcome, <%= @user.username %>!<br>
 
 <h2>Your Pets</h2>
-
-<%# <% parse_pet %>
+<ul>
+  <li>PET</li>
+  <%= @user.pets %>
+  <% list_user_pets %>
+</ul>
 
 <h3>Click <a href="/pets/new">here</a> to add pet</h3>
