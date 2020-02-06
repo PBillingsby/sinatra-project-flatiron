@@ -6,8 +6,6 @@
 <h1>Welcome, <%= @user.username %>!<br>
 
 <h2>Your Pets</h2>
-
-
 <% list_user_pets %>
   <ul>
   <% if current_user.pets.count > 0 %>
@@ -17,7 +15,3 @@
   <% end %>
   </ul>
 <h3>Click <a href="/pets/new">here</a> to add pet</h3>
-
-<% @pet_objs.each do |pet| %>
-  <%= @pet.name%>
-<% end %>

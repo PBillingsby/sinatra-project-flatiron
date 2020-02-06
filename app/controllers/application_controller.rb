@@ -29,6 +29,7 @@ class ApplicationController < Sinatra::Base
     def list_user_pets
       @pet_objs = []
       current_user.pets.each do |obj|
+        binding.pry
         @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "id" || pet_attr == "user_id"}.select {|x| x}
         @pet_objs << @new_obj
       end
