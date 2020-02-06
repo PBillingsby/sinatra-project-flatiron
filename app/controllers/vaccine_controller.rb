@@ -1,3 +1,0 @@
-class VaccineController < ApplicationController
-
-end

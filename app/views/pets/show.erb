@@ -4,6 +4,10 @@
 <%@new_current.each do |pet_attribute, attribute_value|%>
   <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
 <% end %>
+
+
+<form action="/vaccinations/new" method="GET">
+  <input type="submit" value="Add Vaccination">
 <form action="/pets/<%= @current_pet_id %>/edit" method="GET">
   <input type="submit" value="Edit Pet"><br>
 </form>

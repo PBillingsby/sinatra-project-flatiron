@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
     if is_logged_in?
       redirect "/users/#{current_user.id}"
     else
-      erb :welcome
+    erb :welcome
     end 
   end
 
@@ -34,10 +34,16 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def list_pet_vaccinations
+      @vaccinations = Vaccinations.all
+    end
+
     def current_pet
+
       @current = @pet_objs.detect {|x| x["id"]  == params[:id].to_i}
       @current_id = @current["id"].to_i
       @new_current = @current.reject {|attribute| attribute == "id"}
+      
     end
   end
 end

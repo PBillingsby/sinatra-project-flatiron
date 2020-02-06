@@ -31,9 +31,10 @@ ActiveRecord::Schema.define(version: 20200202231429) do
 
   create_table "vaccinations", force: :cascade do |t|
     t.string   "vacc_type"
+    t.text     "description"
     t.integer  "frequency"
     t.datetime "date_given"
-    t.boolean  "overdue"
+    t.integer  "pet_id"
   end
 
 end

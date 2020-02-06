@@ -1,11 +1,18 @@
 class UserController < ApplicationController
   
   get '/new' do
-    erb :'registrations/new'
+    erb :'/users/registrations/new'
+  end
+
+  post '/users' do
+    @user = User.create(params) # User.new
+    session[:user_id] = @user.id
+    current_user = @user
+    redirect "/users/#{current_user.id}"
   end
 
   get '/login' do
-    is_logged_in? ? (redirect "/users/#{current_user.id}") : (erb :'sessions/login')
+    is_logged_in? ? (redirect "/users/#{current_user.id}") : (erb :'/users/sessions/login')
   end
 
   post '/login' do
@@ -19,13 +26,6 @@ class UserController < ApplicationController
     else
       redirect "/"
     end
-  end
-
-  post '/users' do
-    @user = User.create(params) # User.new
-    session[:user_id] = @user.id
-    current_user = @user
-    redirect "/users/#{current_user.id}"
   end
 
   get '/users/:id' do

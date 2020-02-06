@@ -3,7 +3,7 @@ class PetController < ApplicationController
     erb :'pets/new'
   end
   
-  post '/pets/new' do # post pets
+  post '/pets' do # post pets
     @pet = Pet.create(params) # Can't handle
     # @pet = Pet.new(params).save ?????
     @pet.user_id = current_user.id
@@ -19,7 +19,7 @@ class PetController < ApplicationController
   end
 
   get '/pets/:id' do
-    @current_pet_id = params[:id]
+    @current_pet_id = params[:id])
     @pet = Pet.find(params[:id])
     erb :'/pets/show'
   end
