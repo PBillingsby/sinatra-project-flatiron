@@ -7,9 +7,8 @@ class PetController < ApplicationController
     @pet = Pet.create(params) # Can't handle
     # @pet = Pet.new(params).save ?????
     @pet.user_id = current_user.id
-    if @pet.dob
-      @pet.dob.to_date
-    end
+    @pet.dob.to_date
+    @pet.gender.capitalize
     current_user.pets << @pet
     redirect "/users/#{current_user.id}" # CONNECTING USER AND PET
   end

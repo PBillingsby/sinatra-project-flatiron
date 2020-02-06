@@ -10,11 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    if is_logged_in?
-      redirect "/users/#{current_user.id}"
-    else
+    # if is_logged_in?
+    #   redirect "/users/#{current_user.id}"
+    # else
       erb :welcome
-    end 
+    # end 
   end
 
   helpers do
@@ -27,9 +27,12 @@ class ApplicationController < Sinatra::Base
     end
 
     def list_user_pets
+      @pet_objs = []
       current_user.pets.each do |obj|
         @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "id" || pet_attr == "user_id"}.select {|x| x}
+        @pet_objs << @new_obj
       end
+      binding.pry
       
       # new_arr = []
       # current_user.pets.each do |obj|
