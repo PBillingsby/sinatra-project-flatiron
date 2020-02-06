@@ -1,17 +1,18 @@
+<%list_user_pets%>
+<%current_pet%>
+<%binding.pry%>
 
-<h3>Edit <%= @pet.name%></h3>
-
-<form action="/pets/<%= @pet.id%>" method="POST">
+<form action="/pets/<%= @current.id%>" method="POST">
   <input type="hidden" id="hidden" name="_method" value="PATCH">
   <label>Pet Name:</label>
-  <input type="text" name="name" value="<%=@pet.name%>">
+  <input type="text" name="name" value="<%=@current.name%>">
   <label>DOB:</label>
-  <input type="text" name="age" value="<%=@pet.dob%>">
+  <input type="text" name="age" value="<%=@current.dob%>">
   <label>Weight:</label>
-  <input type="text" name="weight" value="<%=@pet.weight%>">
+  <input type="text" name="weight" value="<%=@current.weight%>">
   <label>Breed:</label>
-  <input type="text" name="breed" value="<%=@pet.breed%>">
+  <input type="text" name="breed" value="<%=@current.breed%>">
   <label>Species</label>
-  <input type="text" name="species" value="<%=@pet.species%>">
+  <input type="text" name="species" value="<%=@current.species%>">
   <input type="submit" value="Update Pet">
 </form>

@@ -19,6 +19,7 @@ class PetController < ApplicationController
   end
 
   get '/pets/:id' do
+    @current_pet_id = params[:id]
     @pet = Pet.find(params[:id])
     erb :'/pets/show'
   end

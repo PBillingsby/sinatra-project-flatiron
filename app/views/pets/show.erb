@@ -1,13 +1,10 @@
 <h1>Made it</h1>
-
-
 <!-- ADD DYNAMIC SHOW -->
-<h3>Name:</h3> <%= @pet.name%></span>
-<h3>Date Of Birth:</h3> <%= @pet.dob%>
-<h3>Species:</h3><%= @pet.species %>
-<h3>Breed:</h3> <%= @pet.breed%>
-<h3>Sex:</h3> <%= @pet.gender%>
-
-<form action="/pets/<%= @pet.id %>/edit" method="GET">
+<%list_user_pets%>
+<%current_pet%>
+<%@current.each do |pet_attribute, attribute_value|%>
+  <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+<% end %>
+<form action="/pets/<%= @current_pet_id %>/edit" method="GET">
   <input type="submit" value="Edit Pet"><br>
 </form>

@@ -10,13 +10,13 @@
     <input type="text" name="breed" placeholder="Breed">
     <input type="text" name="weight" placeholder="Weight">
     <select type="text" id="pet_form" name="gender">
-      <option value="-">Gender</option>
+      <option value="N/A">Gender</option>
       <option value="male">Male</option>
       <option value="female">Female</option>
     </select>
-    <span><input type="submit" value="Add Pet">
+    <input type="submit" value="Add Pet">
     <form action="/users/#{current_user.id}" method="GET">
       <input type="submit" value="Home">
-    </form></span>
+    </form>
   </form>
 </div>
