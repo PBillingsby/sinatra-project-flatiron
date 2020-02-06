@@ -34,4 +34,11 @@ class PetController < ApplicationController
     @pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species])
     redirect "/pets/#{@pet.id}"
   end
+
+  delete '/pets/:id/delete' do
+    @pet = Pet.find(params[:id])
+    @pet.destroy
+    flash[:message] = "Farewell, pet!"
+    redirect "/users/#{current_user.id}"
+  end
 end

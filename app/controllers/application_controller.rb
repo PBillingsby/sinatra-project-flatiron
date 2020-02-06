@@ -28,14 +28,16 @@ class ApplicationController < Sinatra::Base
 
     def list_user_pets
       @pet_objs = []
-      current_user.pets.each do |obj|
+      current_user.pets.each do |obj| # REMOVE ID FROM SHOW BUT KEEP IN @new_current
         @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "user_id"}.select {|x| x} # pet_attr == "id" || 
         @pet_objs << @new_obj
       end
     end
 
     def current_pet
-      @current = @pet_objs.detect {|x| x["id"]  == params[:id].to_i}.reject {|attribute| attribute == "id"}
+      @current = @pet_objs.detect {|x| x["id"]  == params[:id].to_i}
+      @current_id = @current["id"].to_i
+      @new_current = @current.reject {|attribute| attribute == "id"}
     end
   end
 end

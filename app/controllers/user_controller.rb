@@ -13,6 +13,9 @@ class UserController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
+    elsif User.find(params[:id]).id != session[:user_id]
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
     else
       redirect "/"
     end
@@ -26,7 +29,7 @@ class UserController < ApplicationController
   end
 
   get '/users/:id' do
-    if User.find(params[:id]).id != session[:user_id] # If user try to access a different user page.
+    if params["id"].to_i > User.count  # If user try to access a different user page.
       flash[:message] = "You are not authorized to access this profile."
       redirect "/users/#{session[:user_id]}"
     else

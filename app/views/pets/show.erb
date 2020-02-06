@@ -1,10 +1,13 @@
-<h1>Made it</h1>
-<!-- ADD DYNAMIC SHOW -->
+
 <%list_user_pets%>
 <%current_pet%>
-<%@current.each do |pet_attribute, attribute_value|%>
+<%@new_current.each do |pet_attribute, attribute_value|%>
   <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
 <% end %>
 <form action="/pets/<%= @current_pet_id %>/edit" method="GET">
   <input type="submit" value="Edit Pet"><br>
+</form>
+<form action="/pets/<%= @current_pet_id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete pet"><br>
 </form>

@@ -17,13 +17,14 @@
     <div class="wrapper">
 
         <%= yield %>
-        <% if current_user %>
+       
+      <footer class="branding">
+        <small>&copy; 2020 <strong>SinatraProjectWIP</strong></small>
+         <% if current_user %>
           <form action="/logout" method="POST">
             <input type="submit" value="Logout">
           </form>
         <% end %>
-      <footer class="branding">
-        <small>&copy; 2020 <strong>SinatraProjectWIP</strong></small>
       </footer>
     </div>
 

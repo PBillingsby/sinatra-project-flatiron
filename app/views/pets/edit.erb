@@ -1,18 +1,12 @@
 <%list_user_pets%>
 <%current_pet%>
-<%binding.pry%>
 
-<form action="/pets/<%= @current.id%>" method="POST">
-  <input type="hidden" id="hidden" name="_method" value="PATCH">
-  <label>Pet Name:</label>
-  <input type="text" name="name" value="<%=@current.name%>">
-  <label>DOB:</label>
-  <input type="text" name="age" value="<%=@current.dob%>">
-  <label>Weight:</label>
-  <input type="text" name="weight" value="<%=@current.weight%>">
-  <label>Breed:</label>
-  <input type="text" name="breed" value="<%=@current.breed%>">
-  <label>Species</label>
-  <input type="text" name="species" value="<%=@current.species%>">
-  <input type="submit" value="Update Pet">
-</form>
+  <form action="/pets/<%= @current_id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <% @new_current.each do |pet_attribute, attribute_value| %>
+      <label><%=pet_attribute.capitalize%></label>
+      <input type="text" name="<%=pet_attribute%>" value="<%=attribute_value%>">
+    <% end %>
+    <input type="submit" value="Update Pet">
+  </form>
+
