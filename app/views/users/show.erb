@@ -6,10 +6,10 @@
 <h1>Welcome, <%= @user.username %>!<br>
 
 <h2>Your Pets</h2>
-<ul>
-  <li>PET</li>
-  <%= @user.pets %>
-  <% list_user_pets %>
-</ul>
-
+<% list_user_pets %>
+  <ul>
+  <% @new_obj.each do |pet_attribute, attribute_value| %>
+    <li><strong><%= pet_attribute %>:</strong> <%= attribute_value %></li>
+  <% end %>
+  </ul>
 <h3>Click <a href="/pets/new">here</a> to add pet</h3>

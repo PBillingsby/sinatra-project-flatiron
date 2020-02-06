@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20200202231429) do
 
   create_table "pets", force: :cascade do |t|
     t.string  "name"
-    t.date    "dob"
+    t.text    "dob"
     t.string  "gender"
     t.string  "species"
-    t.integer "weight"
+    t.string  "weight"
     t.string  "breed"
     t.integer "user_id"
   end

@@ -1,7 +1,6 @@
 require './config/environment'
 require 'rack-flash'
 class ApplicationController < Sinatra::Base
-  
   use Rack::Flash
   configure do
     set :public_folder, 'public'
@@ -27,22 +26,21 @@ class ApplicationController < Sinatra::Base
       User.find_by_id(session[:user_id])
     end
 
-
-
     def list_user_pets
-      new_arr = []
       current_user.pets.each do |obj|
-        new_arr << obj.attributes.reject {|x| x == "id" || x == "user_id"}.select {|x| x}
-        new_arr.each do |k|
-          k.each do |k, v|
-            if v == "" || v == nil
-              v = "N/A"
-            end
-          end
-        end
+        @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "id" || pet_attr == "user_id"}.select {|x| x}
       end
-      binding.pry
-      new_arr
+      
+      # new_arr = []
+      # current_user.pets.each do |obj|
+      #   obj.attributes.each do |k, v|
+      #     if k.attributes == "" || v == nil
+      #      v = "N/A"
+      #     end
+      #   end
+      #   new_arr << obj.attributes.reject {|x| x == "id" || x == "user_id"}.select {|x| x}
+      # end
+      # new_arr
     end
   end
 end

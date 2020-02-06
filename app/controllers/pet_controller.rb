@@ -8,7 +8,7 @@ class PetController < ApplicationController
     # @pet = Pet.new(params).save ?????
     @pet.user_id = current_user.id
     if @pet.dob
-      @pet.dob.strftime("%m/%d/%Y")
+      @pet.dob.to_date
     end
     current_user.pets << @pet
     redirect "/users/#{current_user.id}" # CONNECTING USER AND PET
@@ -31,6 +31,7 @@ class PetController < ApplicationController
 
   patch '/pets/:id' do
     @pet = Pet.find(params[:id])
-    @pet.update(params)
+    @pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species])
+    redirect "/pets/#{@pet.id}"
   end
 end

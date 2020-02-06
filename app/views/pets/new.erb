@@ -5,8 +5,8 @@
   <form action="/pets/new" method="POST" id="pet_form">
     
     <input type="text" name="name" placeholder="Name"></span>
-    <input type="text" name="dob" placeholder="DOB">
-     <input type="text" name="species" placeholder="Species">
+    <input type="date-select" name="dob" placeholder="DOB">
+    <input type="text" name="species" placeholder="Species">
     <input type="text" name="breed" placeholder="Breed">
     <input type="text" name="weight" placeholder="Weight">
     <select type="text" id="pet_form" name="gender">
@@ -14,6 +14,9 @@
       <option value="male">Male</option>
       <option value="female">Female</option>
     </select>
-    <input type="submit" value="Add Pet">
+    <span><input type="submit" value="Add Pet">
+    <form action="/users/#{current_user.id}" method="GET">
+      <input type="submit" value="Home">
+    </form></span>
   </form>
 </div>
