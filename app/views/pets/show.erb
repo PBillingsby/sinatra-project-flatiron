@@ -1,17 +1,42 @@
-
+<link rel="stylesheet" href="/stylesheets/views.css">
+<% if flash.has?(:message) %>
+  <div class="flash">
+    <h3><%= flash[:message] %></h3>
+  </div>
+<% end %>
 <%list_user_pets%>
 <%current_pet%>
+<%list_pet_vaccinations%>
 <%@new_current.each do |pet_attribute, attribute_value|%>
   <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
 <% end %>
-
-
-<form action="/vaccinations/new" method="GET">
-  <input type="submit" value="Add Vaccination">
+<%binding.pry%>
 <form action="/pets/<%= @current_pet_id %>/edit" method="GET">
   <input type="submit" value="Edit Pet"><br>
 </form>
-<form action="/pets/<%= @current_pet_id %>/delete" method="POST">
+<form action="/pets/<%= @current["id"] %>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="delete">
   <input type="submit" value="Delete pet"><br>
 </form>
+<div align="center">
+  <h3>Shots</h3>
+  <%if @vacc_count >= 1%> <%# Handles error if pet has no vaccinations%>
+    <ul>
+    <%@pet_vaccinations.each do |pet_vaccination|%>
+      <%pet_vaccination.each do |v_attr, v_value|%>
+        <li><strong><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
+      <%end%>
+      <form action="/vaccinations/<%= @current_pet_vacc_id %>" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete vaccination">
+      </form><br>
+    <%end%>
+    </ul>
+    
+    <form action="/vaccinations/new" method="GET">
+    <input type="hidden" name="current_pet_id" value="<%=@pet.id%>">
+    <input type="submit" value="Add Vaccination">
+    </form>
+  <%end%>
+</div>
+

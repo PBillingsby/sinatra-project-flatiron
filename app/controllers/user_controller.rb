@@ -37,7 +37,6 @@ class UserController < ApplicationController
       erb :'users/show'
     end
   end
-
   # get '/users/:id/edit' do
   #   if current_user.id != params[:id].to_i
   #     flash[:message] = "You are not authorized to access this profile."

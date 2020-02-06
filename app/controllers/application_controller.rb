@@ -29,8 +29,8 @@ class ApplicationController < Sinatra::Base
     def list_user_pets
       @pet_objs = []
       current_user.pets.each do |obj| # REMOVE ID FROM SHOW BUT KEEP IN @new_current
-        @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "user_id"}.select {|x| x} # pet_attr == "id" || 
-        @pet_objs << @new_obj
+        @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "user_id"}
+        @pet_objs << @new_obj # Creates new obj without user_id for iterator in view
       end
     end
 
@@ -39,11 +39,21 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_pet
-
       @current = @pet_objs.detect {|x| x["id"]  == params[:id].to_i}
       @current_id = @current["id"].to_i
       @new_current = @current.reject {|attribute| attribute == "id"}
-      
+    end
+
+    def list_pet_vaccinations
+      pet = Pet.find_by(name: @new_current["name"])
+      @pet_vaccinations = []
+      if pet.vaccinations.count >= 1 
+        pet.vaccinations.each do |vacc|
+          @current_pet_vacc_id = @pet.id
+          # @new_vacc_obj = vacc.attributes.reject {|vacc_attribute| vacc_attribute == "id" || vacc_attribute == "pet_id"}
+          @pet_vaccinations << vacc.attributes.reject {|vacc_attribute| vacc_attribute == "id" || vacc_attribute == "pet_id"}
+        end
+      end
     end
   end
 end

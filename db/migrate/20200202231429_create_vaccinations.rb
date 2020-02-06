@@ -1,6 +1,7 @@
 class CreateVaccinations < ActiveRecord::Migration
   def change
     create_table :vaccinations do |t|
+      t.string :vacc_name
       t.string :vacc_type
       t.text :description
       t.integer :frequency

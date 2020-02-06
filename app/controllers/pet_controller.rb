@@ -2,7 +2,6 @@ class PetController < ApplicationController
   get '/pets/new' do
     erb :'pets/new'
   end
-  
   post '/pets' do # post pets
     @pet = Pet.create(params) # Can't handle
     # @pet = Pet.new(params).save ?????
@@ -19,12 +18,13 @@ class PetController < ApplicationController
   end
 
   get '/pets/:id' do
-    @current_pet_id = params[:id])
     @pet = Pet.find(params[:id])
+    @vacc_count = @pet.vaccinations.count
     erb :'/pets/show'
   end
 
   get '/pets/:id/edit' do
+    binding.pry
     @pet = Pet.find(params[:id])
     erb :'pets/edit'
   end
@@ -37,8 +37,9 @@ class PetController < ApplicationController
 
   delete '/pets/:id/delete' do
     @pet = Pet.find(params[:id])
-    @pet.destroy
-    flash[:message] = "Farewell, pet!"
+    @pet.user_id = nil
+    current_user.pets.reject {|pet_obj| pet_obj == @pet}
+    flash[:message] = "Farewell, #{@pet.name}!"
     redirect "/users/#{current_user.id}"
   end
 end

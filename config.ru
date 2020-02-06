@@ -6,5 +6,5 @@ end
 use Rack::MethodOverride
 use UserController
 use PetController
-use VaccineController
+use VaccinationController
 run ApplicationController
