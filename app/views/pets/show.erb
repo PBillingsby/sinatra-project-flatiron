@@ -10,33 +10,33 @@
 <%@new_current.each do |pet_attribute, attribute_value|%>
   <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
 <% end %>
-<%binding.pry%>
-<form action="/pets/<%= @current_pet_id %>/edit" method="GET">
+<form action="/pets/<%= @current["id"] %>/edit" method="GET">
   <input type="submit" value="Edit Pet"><br>
 </form>
 <form action="/pets/<%= @current["id"] %>/delete" method="POST">
   <input type="hidden" id="hidden" name="_method" value="delete">
   <input type="submit" value="Delete pet"><br>
 </form>
-<div align="center">
-  <h3>Shots</h3>
+<div align="right">
+  <h3><u>Add Vaccination Record</u></h3>
+  <form action="/vaccinations/new" method="GET">
+    <input type="hidden" name="current_pet_id" value="<%=@pet.id%>">
+    <input type="submit" value="Add Vaccination">
+  </form>
+  <h3><u>Recorded Vaccinations</u></h3>
   <%if @vacc_count >= 1%> <%# Handles error if pet has no vaccinations%>
-    <ul>
     <%@pet_vaccinations.each do |pet_vaccination|%>
+    <ul>
       <%pet_vaccination.each do |v_attr, v_value|%>
         <li><strong><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
       <%end%>
-      <form action="/vaccinations/<%= @current_pet_vacc_id %>" method="POST">
-        <input type="hidden" id="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete vaccination">
-      </form><br>
     <%end%>
     </ul>
-    
-    <form action="/vaccinations/new" method="GET">
-    <input type="hidden" name="current_pet_id" value="<%=@pet.id%>">
-    <input type="submit" value="Add Vaccination">
-    </form>
+    <form action="/vaccinations/<%=@need_this_to_work%>/delete" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="hidden" name="<%=@need_this_to_work%>">
+        <input type="submit" value="Delete vaccination">
+      </form><br>
   <%end%>
 </div>
 

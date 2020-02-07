@@ -5,9 +5,10 @@ class UserController < ApplicationController
   end
 
   post '/users' do
-    @user = User.create(params) # User.new
+    @user = User.new(params) # User.new
     session[:user_id] = @user.id
     current_user = @user
+    @user.save
     redirect "/users/#{current_user.id}"
   end
 

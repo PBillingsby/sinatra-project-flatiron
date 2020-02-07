@@ -3,12 +3,13 @@ class PetController < ApplicationController
     erb :'pets/new'
   end
   post '/pets' do # post pets
-    @pet = Pet.create(params) # Can't handle
+    @pet = Pet.new(params) # Can't handle
     # @pet = Pet.new(params).save ?????
     @pet.user_id = current_user.id
     @pet.dob.to_date
     @pet.gender.capitalize
     current_user.pets << @pet
+    @pet.save
     redirect "/users/#{current_user.id}" # CONNECTING USER AND PET
   end
 
@@ -24,22 +25,21 @@ class PetController < ApplicationController
   end
 
   get '/pets/:id/edit' do
-    binding.pry
     @pet = Pet.find(params[:id])
     erb :'pets/edit'
   end
 
   patch '/pets/:id' do
     @pet = Pet.find(params[:id])
-    @pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species])
+    @pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species], gender: params[:gender])
     redirect "/pets/#{@pet.id}"
   end
 
   delete '/pets/:id/delete' do
     @pet = Pet.find(params[:id])
-    @pet.user_id = nil
-    current_user.pets.reject {|pet_obj| pet_obj == @pet}
-    flash[:message] = "Farewell, #{@pet.name}!"
+    pet_name = @pet.name
+    @pet.destroy
+    flash[:message] = "Bye, #{pet_name}!"
     redirect "/users/#{current_user.id}"
   end
 end
