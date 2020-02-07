@@ -30,6 +30,7 @@
       <%pet_vaccination.each do |v_attr, v_value|%>
         <li><strong><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
       <%end%>
+      <br>
     <%end%>
     </ul>
     <form action="/vaccinations/<%=@need_this_to_work%>/delete" method="POST">
