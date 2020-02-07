@@ -6,19 +6,18 @@
 <h1>Welcome, <%= @user.username %>!<br>
 
 <h2>Your Pets</h2>
-<%if current_user.pets.count > 0%>
-  <% list_user_pets %>
-  <% if current_user.pets.count > 0 %>
-    <% @pet_objs.each do |pet| %>
-      <ul>
-      <% pet.each do |pet_attribute, attribute_value| %>
-        <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
-      <% end %>
-      </ul>
-      <form action="/pets/<%=pet["id"]%>" method="GET">
-        <input type="submit" value="View">
-      </form><br>
+<%list_user_pets%>
+<% @pet_objs.each do |pet| %>
+  <ul>
+  <% pet.each do |pet_attribute, attribute_value| %>
+    <%if pet_attribute != "id"%>
+      <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
     <%end%>
-  <%end%>
+  <% end %>
+  </ul>
+  <form action="/pets/<%=pet["id"]%>" method="GET">
+    <input type="submit" value="View">
+  </form><br>
 <%end%>
+  
 <h3>Click <a href="/pets/new">here</a> to add pet</h3>

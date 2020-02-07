@@ -23,3 +23,18 @@
   </ul>
   <%end%><br>
 <% end %>
+
+
+
+RE ADD
+
+<% @pet_objs.each do |pet| %>
+    <ul>
+    <% pet.each do |pet_attribute, attribute_value| %>
+      <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+    <% end %>
+    </ul>
+    <form action="/pets/<%=pet["id"]%>" method="GET">
+      <input type="submit" value="View">
+    </form><br>
+  <%end%>

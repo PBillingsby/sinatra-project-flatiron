@@ -5,7 +5,7 @@ class CreateVaccinations < ActiveRecord::Migration
       t.string :vacc_type
       t.text :description
       t.integer :frequency
-      t.datetime :date_given
+      t.text :date_given
       t.integer :pet_id
     end
   end

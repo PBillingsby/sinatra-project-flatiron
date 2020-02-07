@@ -1,5 +1,4 @@
 <form action="/vaccinations" method="POST" id="pet_form">
-  <input type="hidden" name="current_pet" value="<%=params["current_pet_id"]%>">  
   <input type="text" name="vacc_name" placeholder="Vaccination Name">
   <input type="date" name="date_given">
   <input type="text" name="description" placeholder="Description">
@@ -8,7 +7,7 @@
     <option value="core">Core</option>
     <option value="non-core">Non-Core</option>
   </select>
-  <select type="text" id="shot_frequency" name="shot_frequency">
+  <select type="text" id="frequency" name="frequency">
       <option value="" disabled selected>-Shot Frequency in years-</option>
       <option value="1">1</option>
       <option value="2">2</option>
