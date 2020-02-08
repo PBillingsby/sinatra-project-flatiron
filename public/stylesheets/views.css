@@ -1,3 +1,7 @@
 .flash {
   color: red;
 }
+
+.text-left {
+  text-align: left;
+}

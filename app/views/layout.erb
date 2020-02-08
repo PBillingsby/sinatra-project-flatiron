@@ -15,11 +15,21 @@
   </head>
   <body>
     <div class="wrapper">
-        <a href="/"><p align="right">Home</p></a></li>
-      
-        <%= yield %>
+      <% if current_user %> 
+        <div align="right">
+          <form action="/users/<%=current_user.id%>" method="GET">
+            <input type="submit" value="Home">
+          </form>
+        </div>
+      <%end%>
+      <% if flash.has?(:message) %>
+        <div class="flash">
+        <h3><%= flash[:message] %></h3>
+      </div>
+      <% end %>
+      <%= yield %>
        
-      <footer class="branding">
+      <footer class="branding" align="right">
         <small>&copy; 2020 <strong>SinatraProjectWIP</strong></small>
          <% if current_user %>
           <form action="/logout" method="POST">

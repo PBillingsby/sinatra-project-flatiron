@@ -42,15 +42,14 @@ class ApplicationController < Sinatra::Base
     end
 
     def list_pet_vaccinations
-      pet = Pet.find_by(name: @new_current["name"])
+      pet = Pet.find_by(name: @new_current["name"], dob: @new_current["dob"])
       @pet_vaccinations = []
-      if pet.vaccinations.count >= 1
+      if pet.vaccinations.count != nil
         pet.vaccinations.each do |vacc|
-          @current_pet_vacc_id = @pet.id
-          # @new_vacc_obj = vacc.attributes.reject {|vacc_attribute| vacc_attribute == "id" || vacc_attribute == "pet_id"}
-          @pet_vaccinations << vacc.attributes.reject {|vacc_attribute| vacc_attribute == "id" || vacc_attribute == "pet_id"}
+          @pet_vaccinations << vacc.attributes.reject {|vacc_attribute| vacc_attribute == "pet_id"}
         end
       end
+      binding.pry
     end
   end
 end
