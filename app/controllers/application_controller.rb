@@ -8,7 +8,6 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, 'secretssafehere'
   end
-
   get "/" do
     if is_logged_in?
       redirect "/users/#{current_user.id}"
@@ -48,6 +47,19 @@ class ApplicationController < Sinatra::Base
         pet.vaccinations.each do |vacc|
           @pet_vaccinations << vacc.attributes.reject {|vacc_attribute| vacc_attribute == "pet_id"}
         end
+      end
+    end
+
+    def no_access
+      if @pet.user_id != current_user.id
+      
+        flash[:message] = "You are not authorized to access this profile."
+        redirect "/users/#{current_user.id}"
+      else
+        binding.pry
+        @pet = Pet.find(params[:id])
+        @vacc_count = @pet.vaccinations.count
+        erb :'/pets/show'
       end
     end
   end
