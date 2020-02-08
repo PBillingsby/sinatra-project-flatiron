@@ -18,7 +18,7 @@ class VaccinationController < ApplicationController
     redirect "/pets/#{params["current_pet"]}"
   end
 
-  delete '/vaccinations/:id/delete' do
+  delete '/vaccinations/:id' do
     @vaccination = Vaccination.find(params["id"])
     flash[:message] = "#{@vaccination["vacc_name"].capitalize} vaccination record has been deleted."
     @vaccination.destroy

@@ -13,7 +13,7 @@
   <form action="/pets/<%= params["id"] %>/edit" method="GET">
     <input type="submit" value="Edit Pet"><br>
   </form>
-  <form action="/pets/<%= params["id"] %>/delete" method="POST">
+  <form action="/pets/<%= params["id"] %>" method="POST">
     <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete pet"><br>
   </form>
@@ -33,7 +33,7 @@
       <%end%>
     <%end%>
 
-    <form action="/vaccinations/<%=pet_vaccination["id"]%>/delete" method="POST">
+    <form action="/vaccinations/<%=pet_vaccination["id"]%>" method="POST"> <%## REMOVE DELETE %>
       <input type="hidden" id="hidden" name="_method" value="delete">
       <input type="hidden" name="pet_param" value="<%=@pet.id%>">
       <input type="submit" value="Delete vaccination">

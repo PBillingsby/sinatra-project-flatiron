@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      User.find_by_id(session[:user_id])
+      @user ||= User.find_by_id(session[:user_id])
     end
 
     def list_user_pets
@@ -49,7 +49,6 @@ class ApplicationController < Sinatra::Base
           @pet_vaccinations << vacc.attributes.reject {|vacc_attribute| vacc_attribute == "pet_id"}
         end
       end
-      binding.pry
     end
   end
 end

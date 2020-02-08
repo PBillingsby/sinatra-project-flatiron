@@ -2,20 +2,15 @@ class PetController < ApplicationController
   get '/pets/new' do
     erb :'pets/new'
   end
+
   post '/pets' do # post pets
     @pet = Pet.new(params) # Can't handle
-    # @pet = Pet.new(params).save ?????
     @pet.user_id = current_user.id
     @pet.dob.to_date
     @pet.gender.capitalize
     current_user.pets << @pet
     @pet.save
     redirect "/users/#{current_user.id}" # CONNECTING USER AND PET
-  end
-
-  get '/pets' do
-    @pets = Pet.all
-    erb :'pets/index'
   end
 
   get '/pets/:id' do
@@ -35,7 +30,7 @@ class PetController < ApplicationController
     redirect "/pets/#{@pet.id}"
   end
 
-  delete '/pets/:id/delete' do
+  delete '/pets/:id' do
     @pet = Pet.find(params[:id])
     pet_name = @pet.name
     @pet.destroy
