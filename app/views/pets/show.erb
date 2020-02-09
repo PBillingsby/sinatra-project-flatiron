@@ -1,13 +1,11 @@
 <link rel="stylesheet" href="/stylesheets/views.css">
 
-<%list_user_pets%>
 <%current_pet%>
-
 <%list_pet_vaccinations%>
-
-<div align="center" class="text-left">  
+<div align="center">  
+  <h3>Hi, <%=@pet["name"]%>!</h3>
   <%# THIS LISTS USER PET %>
-  <%@new_current.each do |pet_attribute, attribute_value|%>
+  <%@new_current.each do |pet_attribute, attribute_value|%> 
     <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
   <% end %>
   <form action="/pets/<%= params["id"] %>/edit" method="GET">

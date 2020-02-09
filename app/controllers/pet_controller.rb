@@ -6,7 +6,6 @@ class PetController < ApplicationController
   post '/pets' do # post pets
     @pet = Pet.new(params)
     @pet.user_id = current_user.id
-    @pet.dob.to_date
     @pet.gender.capitalize
     current_user.pets << @pet
     @pet.save
@@ -14,17 +13,14 @@ class PetController < ApplicationController
   end
 
   get '/pets/:id' do
-  rescue ActiveRecord::RecordNotFound
-    flash[:message] = "Page not found"
-    redirect "/users/#{current_user.id}"
-    # if @pet = Pet.find(params[:id])
-    #   no_access
-    # else
-    #   redirect "/users/#{current_user.id}"
-    # end
+    no_access
+    list_pet_vaccinations
+    @pet = Pet.find(params[:id])
+    erb :'pets/show'
   end
 
   get '/pets/:id/edit' do
+    no_access
     @pet = Pet.find(params[:id])
     erb :'pets/edit'
   end

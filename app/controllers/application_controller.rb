@@ -25,23 +25,13 @@ class ApplicationController < Sinatra::Base
       @user ||= User.find_by_id(session[:user_id])
     end
 
-    def list_user_pets
-      @pet_objs = []
-      if !current_user.pets.empty?
-        current_user.pets.each do |obj| # REMOVE ID FROM SHOW BUT KEEP IN @new_current
-          @new_obj = obj.attributes.reject {|pet_attr| pet_attr == "user_id"}
-          @pet_objs << @new_obj # Creates new obj without user_id for iterator in view
-        end
-      end
-    end
-
     def current_pet
-      @pet = Pet.find(params["id"])
-      @new_current = @pet.attributes.reject {|x| x == "id" || x == "user_id"}
+      @pet = Pet.find_by(id: params["id"])
+      @new_current = @pet.attributes.reject {|x| x == "id" || x == "user_id" || x == "name"} # Creates new object to iterate without id, name, user_id attributes.
     end
 
     def list_pet_vaccinations
-      pet = Pet.find_by(name: @new_current["name"], dob: @new_current["dob"])
+      pet = Pet.find_by(id: params["id"])
       @pet_vaccinations = []
       if pet.vaccinations.count != nil
         pet.vaccinations.each do |vacc|
@@ -51,15 +41,40 @@ class ApplicationController < Sinatra::Base
     end
 
     def no_access
-      if @pet.user_id != current_user.id
-      
+      if !current_user.pets.include?(Pet.find_by(id: params[:id]))
         flash[:message] = "You are not authorized to access this profile."
         redirect "/users/#{current_user.id}"
+      end
+    end
+
+    def new_user_handling
+      if User.find_by(username: params[:username])
+        flash[:message] = "Username taken. Try again."
+      elsif params[:password].length < 8
+        flash[:message] = "Password must be atleast 8 characters. Try again."
+      elsif User.find_by(email: params[:email])
+        flash[:message] = "Email taken. Try again."
+      elsif @user.save
+        session[:user_id] = @user.id
+        redirect "/users/#{current_user.id}"
       else
-        binding.pry
-        @pet = Pet.find(params[:id])
-        @vacc_count = @pet.vaccinations.count
-        erb :'/pets/show'
+        flash[:message] = "Email not valid. Try again."
+      end
+      redirect "/new"
+    end
+
+    def login_handling
+      @user = User.find_by(username: params[:username])
+      if @user && @user.authenticate(params[:password]) # Authenticate user.
+        session[:user_id] = @user.id
+        redirect "/users/#{current_user.id}"
+      elsif !params[:id]
+        flash[:message] = "Username or password incorrect. Try again." # Handle incorrect login information
+        redirect "/login"
+      elsif session[:user_id] == current_user.id # Handle if user is already logged in.
+        redirect "/users/#{current_user.id}"
+      else
+        redirect "/"
       end
     end
   end
