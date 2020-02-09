@@ -1,8 +1,6 @@
 <form action="/vaccinations" method="POST" id="pet_form">
-  <input type="hidden" name="current_pet" value="<%=params["current_pet_id"]%>">  
-  <label>*</label>
+  <input type="hidden" name="current_pet" value="<%=params["current_pet_id"]%>">
   <input type="text" name="vacc_name" placeholder="Vaccination Name">
-  <label>*</label>
   <input type="text" name="date_given" placeholder="Date Given">
   <input type="text" name="description" placeholder="Notes">
   <select type="text" name="vacc_type">
@@ -21,4 +19,5 @@
       <option value="7">7</option>
     </select>
   <input type="submit" value="Add Vaccination">
+  <p>* - Vaccination name and date given required.</p>
 </form>

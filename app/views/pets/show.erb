@@ -2,42 +2,45 @@
 
 <%current_pet%>
 <%list_pet_vaccinations%>
-<div align="center">  
-  <h3>Hi, <%=@pet["name"]%>!</h3>
-  <%# THIS LISTS USER PET %>
-  <%@new_current.each do |pet_attribute, attribute_value|%> 
-    <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
-  <% end %>
-  <form action="/pets/<%= params["id"] %>/edit" method="GET">
-    <input type="submit" value="Edit Pet"><br>
-  </form>
-  <form action="/pets/<%= params["id"] %>" method="POST">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete pet"><br>
-  </form>
-<%# THIS ADDS NEW PET VACCINATION %>
-  <h3><u>Add Vaccination Record</u></h3>
-  <form action="/vaccinations/new" method="GET">
-    <input type="hidden" name="current_pet_id" value="<%=@pet.id%>">
-    <input type="submit" value="Add Vaccination">
-  </form>
-  <%# THIS LISTS PETS CURRENT VACCINATION %>
-  <h3><u>Recorded Vaccinations</u></h3>
-  <%@pet_vaccinations.each do |pet_vaccination|%>
-  <ul>
-    <%pet_vaccination.each do |v_attr, v_value|%>
-      <%if v_attr != "id"%>
-        <li><strong><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
-      <%end%>
-    <%end%>
-
-    <form action="/vaccinations/<%=pet_vaccination["id"]%>" method="POST"> <%## REMOVE DELETE %>
+<div class="pet-view">
+  <div>
+    <%# THIS LISTS USER PET %>
+    <%@new_current.each do |pet_attribute, attribute_value|%> 
+      <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+    <% end %>
+    <form action="/pets/<%= params["id"] %>/edit" method="GET">
+      <input type="submit" value="Edit Pet"><br>
+    </form>
+    <form action="/pets/<%= params["id"] %>" method="POST">
       <input type="hidden" id="hidden" name="_method" value="delete">
-      <input type="hidden" name="pet_param" value="<%=@pet.id%>">
-      <input type="submit" value="Delete vaccination">
-    </form><br>
-    <br>
-  </ul>
-  <%end%>
+      <input type="submit" value="Delete pet"><br>
+    </form>
+  </div>
+<%# THIS ADDS NEW PET VACCINATION %>
+  <div class="vaccination-records">
+    <h3><u>Add Vaccination Record</u></h3>
+    <form action="/vaccinations/new" method="GET">
+      <input type="hidden" name="current_pet_id" value="<%=@pet.id%>">
+      <input type="submit" value="Add Vaccination">
+    </form>
+    <%# THIS LISTS PETS CURRENT VACCINATION %>
+    <h3><u>Recorded Vaccinations</u></h3>
+    <%@pet_vaccinations.each do |pet_vaccination|%>
+    <ul>
+      <%pet_vaccination.each do |v_attr, v_value|%>
+        <%if v_attr != "id"%>
+          <li><strong><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
+        <%end%>
+      <%end%>
+
+      <form action="/vaccinations/<%=pet_vaccination["id"]%>" method="POST"> <%## REMOVE DELETE %>
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="hidden" name="pet_param" value="<%=@pet.id%>">
+        <input type="submit" value="Delete vaccination">
+      </form><br>
+      <br>
+    </ul>
+    <%end%>
+  </div>
 </div>
 

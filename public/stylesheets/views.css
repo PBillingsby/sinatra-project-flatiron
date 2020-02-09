@@ -1,3 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+body {
+  font-family: Poppins;
+}
 .flash {
   color: red;
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
+.nav-bar {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.nav-bar a {
+  color: #444;
+  text-decoration: none;
+}
+.nav-bar ul li {
+  display: inline-block;
+  padding: 0 3vw;
+}
+.pet-view {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-left: 3vw;
+  margin: 5vh;
 }

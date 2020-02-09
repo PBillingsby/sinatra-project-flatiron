@@ -7,7 +7,6 @@
     padding: 0;
   }
 
-
   html, body {
     height: 100%;
     width: 100%;
@@ -15,23 +14,24 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: lightblue;
+    background-image: linear-gradient(to right,rgb(240, 254, 255), rgb(220, 255, 243));
+    background-repeat: no-repeat;
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
   }
 
   .wrapper {
-    background: #fff;
+    background-color: #eee;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
-    margin: 16px auto;
+    margin: 20px auto;
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
   }
-
+  
   h1 {
     font-size: 36px;
     line-height: 54px;

@@ -1,4 +1,7 @@
 class PetController < ApplicationController
+  get '/pets' do
+    erb :"/pets/index"
+  end
   get '/pets/new' do
     erb :'pets/new'
   end

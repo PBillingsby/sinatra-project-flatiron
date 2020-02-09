@@ -9,11 +9,11 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'secretssafehere'
   end
   get "/" do
-    if is_logged_in?
+    if User.count == 0 || !is_logged_in?
+      erb :welcome
+    elsif is_logged_in?
       redirect "/users/#{current_user.id}"
-    else
-    erb :welcome
-    end 
+    end
   end
 
   helpers do
@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
 
     def current_pet
       @pet = Pet.find_by(id: params["id"])
-      @new_current = @pet.attributes.reject {|x| x == "id" || x == "user_id" || x == "name"} # Creates new object to iterate without id, name, user_id attributes.
+      @new_current = @pet.attributes.reject {|x| x == "id" || x == "user_id"} # Creates new object to iterate without id, name, user_id attributes.
     end
 
     def list_pet_vaccinations

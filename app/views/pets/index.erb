@@ -1,0 +1,4 @@
+<h3>Your pets.</h3>
+<%current_user.pets.each.with_index(1) do |pet, index|%>
+  <%=index%>. <a href="/pets/<%=pet.id%>"><%=pet.name%></a><br>
+<%end%>

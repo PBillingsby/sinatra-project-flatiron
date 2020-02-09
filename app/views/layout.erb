@@ -12,14 +12,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/views.css" />
   </head>
   <body>
     <div class="wrapper">
       <% if current_user %> 
-        <div align="right">
-          <form action="/users/<%=current_user.id%>" method="GET">
-            <input type="submit" value="Home">
-          </form>
+        <div class="nav-bar">
+          <ul>
+            <li><a href="/users/<%=current_user.id%>">Home</a></li>
+            <li><a href="/pets">Pets</a></li>
+            <li><a href="/logout">Log Out</a></li><br><br>
+            <hr>
+          </ul>
         </div>
       <%end%>
       <% if flash.has?(:message) %>
@@ -31,11 +35,7 @@
        
       <footer class="branding" align="center">
         <small>&copy; 2020 <strong>SinatraProjectWIP</strong></small>
-         <% if current_user %>
-          <form action="/logout" method="POST">
-            <input type="submit" value="Logout">
-          </form>
-        <% end %>
+
       </footer>
     </div>
 
