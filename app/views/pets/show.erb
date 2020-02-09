@@ -6,7 +6,7 @@
   <div>
     <%# THIS LISTS USER PET %>
     <%@new_current.each do |pet_attribute, attribute_value|%> 
-      <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+      <li><strong class="attribute-color"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
     <% end %>
     <form action="/pets/<%= params["id"] %>/edit" method="GET">
       <input type="submit" value="Edit Pet"><br>
@@ -29,7 +29,7 @@
     <ul>
       <%pet_vaccination.each do |v_attr, v_value|%>
         <%if v_attr != "id"%>
-          <li><strong><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
+          <li><strong class="attribute-color"><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
         <%end%>
       <%end%>
 

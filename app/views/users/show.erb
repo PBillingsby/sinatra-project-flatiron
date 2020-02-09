@@ -6,7 +6,7 @@
   <ul>
   <% pet.attributes.each do |pet_attribute, attribute_value| %>
     <%if pet_attribute != "user_id" && pet_attribute != "id"%>
-      <li><strong><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+      <li><strong class="attribute-color"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
     <%end%>
   <% end %>
   </ul>

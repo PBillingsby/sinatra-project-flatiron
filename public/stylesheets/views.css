@@ -29,3 +29,7 @@ body {
   padding-left: 3vw;
   margin: 5vh;
 }
+
+.attribute-color {
+  color: rgb(53, 176, 247);
+}
