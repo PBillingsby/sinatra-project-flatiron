@@ -2,11 +2,16 @@ class PetController < ApplicationController
   get '/pets' do
     erb :"/pets/index"
   end
+
   get '/pets/new' do
     erb :'pets/new'
   end
 
   post '/pets' do # post pets
+    if params["dob"].to_date > Time.now.to_date
+      flash[:message] = "Date of birth must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}" # Handles if date given later than Time.now
+      redirect "/pets/new"
+    end
     @pet = Pet.new(params)
     @pet.user_id = current_user.id
     @pet.gender.capitalize
