@@ -11,10 +11,6 @@ hr {
 	margin: 10px 0;
 }
 
-.new {
-	text-align: center;
-}
-
 .flash {
 	color: red;
 	text-align: center;
@@ -23,10 +19,6 @@ hr {
 .center {
 	text-align: center;
 	padding-top: 10px;
-}
-
-.index-decoration {
-	text-decoration: none;
 }
 
 .nav-bar {
@@ -51,19 +43,6 @@ hr {
 	padding-left: 3vw;
 	margin: 5vh;
 }
-
-.form-block {
-	display: inline-flex;
-	box-sizing: content-box;
-}
-
-.display-form>input,
-select {
-	display: inline-flex;
-	margin-bottom: 1vh;
-	box-sizing: content-box;
-}
-
 .attribute-color {
 	color: rgb(53, 176, 247);
 }
