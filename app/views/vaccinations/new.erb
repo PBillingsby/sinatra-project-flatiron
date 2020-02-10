@@ -1,3 +1,4 @@
+<h3>Add New Vaccination</h3>
 <form action="/vaccinations" method="POST" id="pet_form">
   <input type="hidden" name="current_pet" value="<%=params["current_pet_id"]%>">
   <input type="text" name="vacc_name" placeholder="Vaccination Name">
@@ -9,14 +10,12 @@
     <option value="non-core">Non-Core</option>
   </select>
   <select type="text" id="frequency" name="frequency">
-      <option value="" disabled selected>-Shot Frequency in years-</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
+      <option value="" disabled selected>-Shot Frequency-</option>
+      <option value="1-month">1 Month</option>
+      <option value="3-months">3 Months</option>
+      <option value="6-months">6 Months</option>
+      <option value="1-year">1 Year</option>
+      <option value="3-year">3 Year</option>
     </select>
   <input type="submit" value="Add Vaccination">
   <p>* - Vaccination name and date given required.</p>

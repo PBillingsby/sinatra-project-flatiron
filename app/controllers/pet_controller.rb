@@ -16,6 +16,9 @@ class PetController < ApplicationController
   end
 
   get '/pets/:id' do
+    if !current_user
+      redirect "/"
+    end
     no_access
     list_pet_vaccinations
     @pet = Pet.find(params[:id])

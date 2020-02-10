@@ -1,35 +1,69 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
-
 body {
-  font-family: Poppins;
+	font-family: Poppins;
 }
+
+h3 {
+	text-align: center;
+}
+
+hr {
+	margin: 10px 0;
+}
+
+.new {
+	text-align: center;
+}
+
 .flash {
-  color: red;
-  text-align: center;
+	color: red;
+	text-align: center;
 }
+
 .center {
-  text-align: center;
+	text-align: center;
+	padding-top: 10px;
 }
+
+.index-decoration {
+	text-decoration: none;
+}
+
 .nav-bar {
-  position: relative;
-  text-align: center;
-  width: 100%;
+	position: relative;
+	text-align: center;
+	width: 100%;
 }
+
 .nav-bar a {
-  color: #444;
-  text-decoration: none;
+	color: #444;
+	text-decoration: none;
 }
+
 .nav-bar ul li {
-  display: inline-block;
-  padding: 0 3vw;
+	display: inline-block;
+	padding: 0 3vw;
 }
-.pet-view {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding-left: 3vw;
-  margin: 5vh;
+
+.form-view {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding-left: 3vw;
+	margin: 5vh;
+}
+
+.form-block {
+	display: inline-flex;
+	box-sizing: content-box;
+}
+
+.display-form>input,
+select {
+	display: inline-flex;
+	margin-bottom: 1vh;
+	box-sizing: content-box;
 }
 
 .attribute-color {
-  color: rgb(53, 176, 247);
+	color: rgb(53, 176, 247);
 }

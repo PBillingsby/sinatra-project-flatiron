@@ -1,11 +1,11 @@
-<%list_user_pets%>
 <%current_pet%>
-<form action="/pets/<%=params["id"]%>" method="POST">
-  <input id="hidden" type="hidden" name="_method" value="PATCH">
-  <% @new_current.each do |pet_attribute, attribute_value| %>
-    <label><%=pet_attribute.capitalize%></label>
-    <input type="text" name="<%=pet_attribute%>" value="<%=attribute_value%>">
-  <% end %>
-  <input type="submit" value="Update Pet">
-</form>
-
+<h3>Edit Pet</h3>
+<div>
+  <form action="/pets/<%=params["id"]%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <% @new_current.each do |pet_attribute, attribute_value| %>
+      <input type="text" name="<%=pet_attribute%>" placeholder="<%=pet_attribute.capitalize%>" value="<%=attribute_value%>">
+    <% end %>
+    <input type="submit" value="Update Pet">
+  </form>
+</div>

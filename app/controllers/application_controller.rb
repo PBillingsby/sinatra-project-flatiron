@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
       @new_current = @pet.attributes.reject {|x| x == "id" || x == "user_id"} # Creates new object to iterate without id, name, user_id attributes.
     end
 
-    def list_pet_vaccinations
+    def list_pet_vaccinations # Dynamic iterator for vaccinations.
       pet = Pet.find_by(id: params["id"])
       @pet_vaccinations = []
       if pet.vaccinations.count != nil
@@ -40,14 +40,14 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def no_access
+    def no_access # Handles user accessing pet that does not belong to them.
       if !current_user.pets.include?(Pet.find_by(id: params[:id]))
         flash[:message] = "You are not authorized to access this profile."
         redirect "/users/#{current_user.id}"
       end
     end
 
-    def new_user_handling
+    def new_user_handling # New user bad input handling.
       if User.find_by(username: params[:username])
         flash[:message] = "Username taken. Try again."
       elsif params[:password].length < 8
@@ -63,7 +63,7 @@ class ApplicationController < Sinatra::Base
       redirect "/new"
     end
 
-    def login_handling
+    def login_handling # User authentication method.
       @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password]) # Authenticate user.
         session[:user_id] = @user.id

@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20200202231429) do
   create_table "vaccinations", force: :cascade do |t|
     t.string  "vacc_name"
     t.string  "vacc_type"
-    t.text    "description"
-    t.integer "frequency"
+    t.text    "notes"
+    t.string  "frequency"
     t.text    "date_given"
     t.integer "pet_id"
   end
