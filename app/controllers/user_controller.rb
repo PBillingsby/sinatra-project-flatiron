@@ -5,7 +5,7 @@ class UserController < ApplicationController
   end
 
   post '/users' do
-    @user = User.new(params)
+    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     new_user_handling
   end
 

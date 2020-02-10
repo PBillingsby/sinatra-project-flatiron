@@ -48,19 +48,24 @@ class ApplicationController < Sinatra::Base
     end
 
     def new_user_handling # New user bad input handling.
-      if User.find_by(username: params[:username])
-        flash[:message] = "Username taken. Try again."
-      elsif params[:password].length < 8
-        flash[:message] = "Password must be atleast 8 characters. Try again."
-      elsif User.find_by(email: params[:email])
-        flash[:message] = "Email taken. Try again."
-      elsif @user.save
-        session[:user_id] = @user.id
-        redirect "/users/#{current_user.id}"
+      if params["password"] == params["password2"]
+        if params[:password].length < 8
+          flash[:message] = "Password must be atleast 8 characters. Try again."
+        elsif User.find_by(username: params["username"])
+          flash[:message] = "Username taken. Try again."
+        elsif User.find_by(email: params[:email])
+          flash[:message] = "Email taken. Try again."
+        elsif @user.save
+          session[:user_id] = @user.id
+          redirect "/users/#{current_user.id}"  
+        else
+          flash[:message] = "Email not valid. Try again."
+        end
+        redirect "/new"
       else
-        flash[:message] = "Email not valid. Try again."
+        flash[:message] = "Both passwords must match"
+        redirect "/new"
       end
-      redirect "/new"
     end
 
     def login_handling # User authentication method.
@@ -75,6 +80,12 @@ class ApplicationController < Sinatra::Base
         redirect "/users/#{current_user.id}"
       else
         redirect "/"
+      end
+    end
+
+    def dob_restrict
+      if Time.strptime(params["dob"], "%m/%d/%Y").to_date > Time.now.to_date
+        flash[:message] = "Date of birth must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}" # Handles if date given later than Time.now
       end
     end
   end

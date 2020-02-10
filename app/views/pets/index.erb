@@ -1,6 +1,14 @@
-<div class="center">  
-  <h3>Your pets.</h3>
-  <%current_user.pets.each do |pet|%>
-    <a href="/pets/<%=pet.id%>"><%=pet.name%></a><br>
-  <%end%>
-</div>
+ <%current_user.pets.each do |pet|%>
+  <div class="grid-list">
+    <ul>
+      <%pet.attributes.each do |pet_attribute, attribute_value|%>
+        <%if pet_attribute != "user_id" && pet_attribute != "id"%>
+          <li><strong class="attribute-color"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+        <%end%>
+      <%end%>
+      <form action="/pets/<%=pet["id"]%>" method="GET">
+        <input type="submit" value="View">
+      </form><br>
+    </ul>
+  </div>
+<%end%>

@@ -8,16 +8,20 @@ class PetController < ApplicationController
   end
 
   post '/pets' do # post pets
-    if params["dob"].to_date > Time.now.to_date
-      flash[:message] = "Date of birth must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}" # Handles if date given later than Time.now
+    if params["dob"].empty?
+      flash[:message] = "Birth date required."
       redirect "/pets/new"
+    elsif dob_restrict
+      redirect "/pets/new"
+    elsif params["weight"] == ""
+      nil
     end
     @pet = Pet.new(params)
     @pet.user_id = current_user.id
-    @pet.gender.capitalize
+    @pet.weight += "lbs"
     current_user.pets << @pet
     @pet.save
-    redirect "/users/#{current_user.id}" # CONNECTING USER AND PET
+    redirect "/pets/#{@pet.id}" # CONNECTING USER AND PET
   end
 
   get '/pets/:id' do
@@ -37,7 +41,11 @@ class PetController < ApplicationController
   end
 
   patch '/pets/:id' do
+    dob_restrict
     @pet = Pet.find(params[:id])
+    if params["weight"]
+      params["weight"] += "lbs"
+    end
     @pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species], gender: params[:gender])
     redirect "/pets/#{@pet.id}"
   end
