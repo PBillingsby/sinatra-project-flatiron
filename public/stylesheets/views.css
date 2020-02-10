@@ -18,7 +18,6 @@ hr {
 
 .center {
 	text-align: center;
-	padding-top: 10px;
 }
 
 .nav-bar {
@@ -41,7 +40,7 @@ hr {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	padding-left: 3vw;
-	margin: 5vh;
+  margin: 0 auto;
 }
 .attribute-color {
 	color: rgb(53, 176, 247);

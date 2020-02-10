@@ -1,8 +1,9 @@
 <%current_pet%>
 <%list_pet_vaccinations%>
 <div class="form-view">
-  <div>
+  <div class="center">
     <%# THIS LISTS USER PET %>
+    <br><br><br><br>
     <%@new_current.each do |pet_attribute, attribute_value|%> 
       <li><strong class="attribute-color"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
     <% end %>
@@ -17,7 +18,7 @@
 <%# THIS ADDS NEW PET VACCINATION %>
   <div>
     <%# THIS LISTS PETS CURRENT VACCINATION %>
-    <h2><u>Recorded Vaccinations</u></h2>
+    <h2>Recorded Vaccinations</h2>
     <%@pet_vaccinations.each do |pet_vaccination|%>
     <ul>
       <%pet_vaccination.each do |v_attr, v_value|%>
