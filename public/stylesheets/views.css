@@ -45,7 +45,8 @@ hr {
 .attribute-color {
 	color: rgb(53, 176, 247);
 }
-.grid-list {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+.float-items {
+	width: 50%;
+	float: left;
+	font-size: 1.25em;
 }

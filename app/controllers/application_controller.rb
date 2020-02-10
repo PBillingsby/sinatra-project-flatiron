@@ -26,8 +26,8 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_pet
-      @pet = Pet.find_by(id: params["id"])
-      @new_current = @pet.attributes.reject {|x| x == "id" || x == "user_id"} # Creates new object to iterate without id, name, user_id attributes.
+      pet = Pet.find_by(id: params["id"])
+      @new_current = pet.attributes.reject {|x| x == "id" || x == "user_id"} # Creates new object to iterate without id and user_id attributes.
     end
 
     def list_pet_vaccinations # Dynamic iterator for vaccinations.

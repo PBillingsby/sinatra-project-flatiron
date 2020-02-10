@@ -1,9 +1,9 @@
  <%current_user.pets.each do |pet|%>
-  <div class="grid-list">
-    <ul>
+  <div>
+    <ul class="float-items center">
       <%pet.attributes.each do |pet_attribute, attribute_value|%>
         <%if pet_attribute != "user_id" && pet_attribute != "id"%>
-          <li><strong class="attribute-color"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
+          <li><strong class="attribute-color large-text"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
         <%end%>
       <%end%>
       <form action="/pets/<%=pet["id"]%>" method="GET">
