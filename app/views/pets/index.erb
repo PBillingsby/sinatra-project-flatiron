@@ -1,8 +1,8 @@
- <%if current_user.pets.empty?%>
-  <p class="center">You have no pets yet. Add one <a href="/pets/new">here</a></p>
-<%end%>
- <%current_user.pets.each do |pet|%>
-  <div>
+ <div>
+  <%if current_user.pets.empty?%>
+    <p>You have no pets yet. Add one <a href="/pets/new">here</a></p>
+  <%end%>
+  <%current_user.pets.each do |pet|%>
     <ul class="float-items center">
       <%pet.attributes.each do |pet_attribute, attribute_value|%>
         <%if pet_attribute != "user_id" && pet_attribute != "id"%>
@@ -13,5 +13,5 @@
         <input type="submit" value="View">
       </form><br>
     </ul>
-  </div>
-<%end%>
+  <%end%>
+</div>

@@ -1,10 +1,10 @@
 class UserController < ApplicationController
   
-  get '/new' do
+  get '/signup' do
     erb :'/users/registrations/new'
   end
 
-  post '/users' do
+  post '/signup' do
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if params["password"] == params["password2"] && @user.save
       session[:user_id] = @user.id

@@ -3,7 +3,7 @@
 <div class="form-view">
   <div class="center">
     <%# THIS LISTS USER PET %>
-    <br>
+    <h2>Pet</h2>
     <%@new_current.each do |pet_attribute, attribute_value|%> 
       <li><strong class="attribute-color"><%= pet_attribute.capitalize %>:</strong> <%= attribute_value.presence || "N/A"%></li>
     <% end %>
@@ -26,7 +26,6 @@
           <li><strong class="attribute-color"><%= v_attr.split("_").map(&:capitalize).join(' ') %>:</strong> <%= v_value.presence || "N/A"%></li>
         <%end%>
       <%end%>
-
       <form action="/vaccinations/<%=pet_vaccination["id"]%>" method="POST"> <%## REMOVE DELETE %>
         <input type="hidden" id="hidden" name="_method" value="delete">
         <input type="hidden" name="pet_param" value="<%=@pet.id%>">
@@ -40,5 +39,3 @@
     </form>
   </div>
 </div>
-
-
