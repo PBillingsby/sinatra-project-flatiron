@@ -38,7 +38,7 @@ class UserController < ApplicationController
       redirect "/"
     elsif params["id"].to_i != current_user.id  # If user try to access a different user page.
       flash[:message] = "You are not authorized to access this profile."
-      redirect "/users/#{session[:user_id]}"
+      redirect "/users/#{current_user.id}"
     else
       @user = User.find(params[:id])
       erb :'users/show'
