@@ -8,18 +8,17 @@ class PetController < ApplicationController
   end
 
   post '/pets' do # post pets
-    if params[:dob].empty? || params[:name].empty? 
+    if params[:dob].empty? || params[:name].empty? # Overrides 404 error handling
       flash[:message] = "Name and birth date required."
       redirect "/pets/new"
     elsif dob_restrict
       redirect "/pets/new"
     end
-    !params[:weight].empty? ? params[:weight] += "lbs" : nil
+    !params[:weight].empty? ? params[:weight].to_s += "lbs" : nil # Concatenate weight and "lbs" || if input empty = N/A
     pet = Pet.new(params)
     pet.user_id = current_user.id
-    current_user.pets << pet
     pet.save
-    redirect "/pets/#{pet.id}" # CONNECTING USER AND PET
+    redirect "/pets/#{pet.id}"
   end
 
   get '/pets/:id' do
