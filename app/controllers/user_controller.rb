@@ -6,7 +6,13 @@ class UserController < ApplicationController
 
   post '/users' do
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    new_user_handling
+    if params["password"] == params["password2"] && @user.save
+      session[:user_id] = @user.id
+      redirect "/users/#{current_user.id}"
+    else
+      flash[:message] = "Please enter valid username, email and password"
+      redirect "/new"
+    end
   end
 
   get '/login' do
@@ -14,11 +20,21 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    login_handling
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password]) # Authenticate user.
+      session[:user_id] = @user.id
+      redirect "/users/#{current_user.id}"
+    elsif session[:user_id] == current_user.id # Handle if user is already logged in.
+      redirect "/users/#{current_user.id}"
+    else
+      flash[:message] = "Log in details incorrect. Try again."
+      redirect "/login"
+    end
   end
 
   get '/users/:id' do
     if !current_user
+      flash[:message] = "You are not authorized to access this profile."
       redirect "/"
     elsif params["id"].to_i != current_user.id  # If user try to access a different user page.
       flash[:message] = "You are not authorized to access this profile."

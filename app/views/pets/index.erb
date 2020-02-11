@@ -1,3 +1,6 @@
+ <%if current_user.pets.empty?%>
+  <p class="center">You have no pets yet. Add one <a href="/pets/new">here</a></p>
+<%end%>
  <%current_user.pets.each do |pet|%>
   <div>
     <ul class="float-items center">

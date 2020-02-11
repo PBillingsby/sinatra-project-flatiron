@@ -13,8 +13,6 @@ class PetController < ApplicationController
       redirect "/pets/new"
     elsif dob_restrict
       redirect "/pets/new"
-    elsif params["weight"] == ""
-      nil
     end
     @pet = Pet.new(params)
     @pet.user_id = current_user.id
@@ -51,9 +49,9 @@ class PetController < ApplicationController
   end
 
   delete '/pets/:id' do
-    @pet = Pet.find(params[:id])
-    pet_name = @pet.name
-    @pet.destroy
+    pet = Pet.find(params[:id])
+    pet_name = pet.name
+    pet.destroy
     flash[:message] = "Bye, #{pet_name}!"
     redirect "/users/#{current_user.id}"
   end
