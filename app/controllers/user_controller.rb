@@ -24,11 +24,12 @@ class UserController < ApplicationController
     if @user && @user.authenticate(params[:password]) # Authenticate user.
       session[:user_id] = @user.id
       redirect "/users/#{current_user.id}"
-    elsif session[:user_id] == current_user.id # Handle if user is already logged in.
-      redirect "/users/#{current_user.id}"
     else
       flash[:message] = "Log in details incorrect. Try again."
       redirect "/login"
+    end
+    if session[:user_id] == current_user.id # Handle if user is already logged in.
+      redirect "/users/#{current_user.id}"
     end
   end
 
@@ -44,9 +45,8 @@ class UserController < ApplicationController
       erb :'users/show'
     end
   end
-  
   get '/logout' do
     session.clear
     redirect "/"
-  end 
+  end
 end

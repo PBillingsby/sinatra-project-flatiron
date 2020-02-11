@@ -16,6 +16,12 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  not_found do
+    status 404
+    flash[:message] = "Page not found."
+    redirect "/users/#{current_user.id}"
+  end
+
   helpers do
     def is_logged_in?
       !!session[:user_id]

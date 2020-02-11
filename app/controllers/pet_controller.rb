@@ -8,8 +8,8 @@ class PetController < ApplicationController
   end
 
   post '/pets' do # post pets
-    if params[:dob].empty?
-      flash[:message] = "Birth date required."
+    if params[:dob].empty? || params[:name].empty? 
+      flash[:message] = "Name and birth date required."
       redirect "/pets/new"
     elsif dob_restrict
       redirect "/pets/new"
@@ -41,9 +41,7 @@ class PetController < ApplicationController
   patch '/pets/:id' do
     dob_restrict
     pet = Pet.find(params[:id])
-    !params[:weight].empty? ? pet.weight += "lbs" : nil
-
-    pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species], gender: params[:gender])
+    pet.update(name: params[:name], dob: params[:dob], weight: params[:weight] += "lbs", breed: params[:breed], species: params[:species], gender: params[:gender])
     redirect "/pets/#{pet.id}"
   end
 
