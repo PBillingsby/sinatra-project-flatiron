@@ -14,7 +14,7 @@ class PetController < ApplicationController
     elsif dob_restrict
       redirect "/pets/new"
     end
-    !params[:weight].empty? ? params[:weight].to_s += "lbs" : nil # Concatenate weight and "lbs" || if input empty = N/A
+    !params[:weight].empty? ? params[:weight] += "lbs" : nil # Concatenate weight and "lbs" || if input empty = N/A
     pet = Pet.new(params)
     pet.user_id = current_user.id
     pet.save
