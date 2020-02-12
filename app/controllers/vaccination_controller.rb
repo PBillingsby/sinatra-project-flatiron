@@ -4,7 +4,6 @@ class VaccinationController < ApplicationController
   end
   
   get '/vaccinations/new' do
-    binding.pry
     @current_pet = Pet.find(params["current_pet_id"])
     erb :'vaccinations/new'
   end
