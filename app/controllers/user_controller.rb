@@ -6,7 +6,7 @@ class UserController < ApplicationController
 
   post '/signup' do
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    if params["password"] == params["password2"] && @user.save
+    if params["password"] == params["password2"] && @user.save # ASK IF password2 VALUE CAN BE ACCESSED /// SECURITY ISSUE?
       session[:user_id] = @user.id
       redirect "/users/#{current_user.id}"
     else

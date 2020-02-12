@@ -14,7 +14,6 @@ class PetController < ApplicationController
     elsif dob_restrict
       redirect "/pets/new"
     end
-    !params[:weight].empty? ? params[:weight] += "lbs" : nil # Concatenate weight and "lbs" || if input empty = N/A
     pet = Pet.new(params)
     pet.user_id = current_user.id
     pet.save
@@ -40,7 +39,7 @@ class PetController < ApplicationController
   patch '/pets/:id' do
     dob_restrict
     pet = Pet.find(params[:id])
-    pet.update(name: params[:name], dob: params[:dob], weight: params[:weight] += "lbs", breed: params[:breed], species: params[:species], gender: params[:gender])
+    pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species], gender: params[:gender])
     redirect "/pets/#{pet.id}"
   end
 
