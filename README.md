@@ -9,6 +9,7 @@ To use VaxLog:
 2. Run ```bundle install``` in terminal.
 3. Run ```rake db:migrate```
 4. Run ```shotgun```
+5. In your browser, go to "localhost:9393".
 ## Built With
 
 * [Ruby](https://www.ruby-lang.org/en/) - Programming language
