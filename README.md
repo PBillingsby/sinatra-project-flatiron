@@ -1,6 +1,6 @@
 # VaxLog
 
-A simple way to keep track of all of your pets vaccines.
+A simple way to keep track of all of your pets vaccinations.
 
 ### Installing
 To use VaxLog:
