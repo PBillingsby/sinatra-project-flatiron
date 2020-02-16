@@ -3,6 +3,8 @@
 A simple way to keep track of all of your pets vaccinations.
 
 ### Installing
+
+Video walkthrough: https://drive.google.com/open?id=1-WUrdl6RFARW9DBJMWqJm4CRKPreI9OU
 To use VaxLog:
 
 1. Clone https://github.com/PBillingsby/sinatra-project-flatiron.git and change into directory.
@@ -18,6 +20,12 @@ To use VaxLog:
 
 ## Contributing
   For pull requests and bug reports: https://github.com/PBillingsby/sinatra-project-flatiron
+
+## Thanks
+Z Drake - Flatiron School cohort lead.
+Madeline Stark - Flatiron School cohort lead.
+The open source community.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

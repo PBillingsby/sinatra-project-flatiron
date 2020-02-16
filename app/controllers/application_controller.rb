@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  not_found do
+  not_found do # Handles ActiveRecord page not found error
     status 404
     flash[:message] = "Page not found."
     if current_user
@@ -57,9 +57,9 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def dob_restrict
+    def dob_restrict  # Handles if date given later than Time.now
       if Time.strptime(params["dob"], "%m/%d/%Y").to_date > Time.now.to_date
-        flash[:message] = "Date of birth must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}" # Handles if date given later than Time.now
+        flash[:message] = "Date of birth must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}"
       end
     end
   end

@@ -10,7 +10,7 @@ class VaccinationController < ApplicationController
 
   post '/vaccinations' do
     if params[:vacc_name].empty? || params[:date_given].empty?
-      flash[:message] = "Name and date required." #TEST
+      flash[:message] = "Name and date required."
       redirect "vaccinations/new?current_pet_id=#{params["current_pet"]}"
     elsif params["date_given"].to_date > Time.now.to_date
       flash[:message] = "Date given must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}" # Handles if date given later than Time.now
