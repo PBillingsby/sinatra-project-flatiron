@@ -11,12 +11,12 @@ class UserController < ApplicationController
       redirect "/users/#{current_user.id}"
     else
       flash[:message] = "Please enter valid username, email and password"
-      redirect "/new"
+      redirect "/signup"
     end
   end
 
   get '/login' do
-    is_logged_in? ? (redirect "/users/#{current_user.id}") : (erb :'/users/sessions/login') # Unless already logged in, show login form.
+    current_user ? (redirect "/users/#{current_user.id}") : (erb :'/users/sessions/login') # Unless already logged in, show login form.
   end
 
   post '/login' do
@@ -47,6 +47,6 @@ class UserController < ApplicationController
   end
   get '/logout' do
     session.clear
-    redirect "/"
+    redirect "/login"
   end
 end

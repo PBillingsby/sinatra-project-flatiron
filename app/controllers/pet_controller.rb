@@ -7,10 +7,7 @@ class PetController < ApplicationController
     erb :'pets/new'
   end
   post '/pets' do # post pets
-    if params[:dob].empty? || params[:name].empty? # Overrides 404 error handling
-      flash[:message] = "Name and birth date required."
-      redirect "/pets/new"
-    elsif dob_restrict
+    if name_dob_restrict
       redirect "/pets/new"
     end
     pet = Pet.new(params)
@@ -21,6 +18,7 @@ class PetController < ApplicationController
 
   get '/pets/:id' do
     if !current_user
+      flash[:message] = "You are not authorized to access this profile."
       redirect "/"
     end
     no_pet_access
@@ -36,7 +34,7 @@ class PetController < ApplicationController
   end
 
   patch '/pets/:id' do
-    dob_restrict
+    name_dob_restrict
     pet = Pet.find(params[:id])
     pet.update(name: params[:name], dob: params[:dob], weight: params[:weight], breed: params[:breed], species: params[:species], gender: params[:gender])
     redirect "/pets/#{pet.id}"

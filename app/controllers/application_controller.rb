@@ -9,22 +9,22 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'secretssafehere'
   end
   get "/" do
-    if User.count == 0 || !is_logged_in?
+    if User.count == 0 || !current_user
       erb :welcome
     elsif is_logged_in?
       redirect "/users/#{current_user.id}"
     end
   end
 
-  not_found do # Handles ActiveRecord page not found error
-    status 404
-    flash[:message] = "Page not found."
-    if current_user
-      redirect "/users/#{current_user.id}"
-    else
-      redirect "/"
-    end
-  end
+  # not_found do # Handles ActiveRecord page not found error
+  #   status 404
+  #   flash[:message] = "Page not found."
+  #   if current_user
+  #     redirect "/users/#{current_user.id}"
+  #   else
+  #     redirect "/"
+  #   end
+  # end
 
   helpers do
     def is_logged_in?
@@ -57,8 +57,10 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def dob_restrict  # Handles if date given later than Time.now
-      if Time.strptime(params["dob"], "%m/%d/%Y").to_date > Time.now.to_date
+    def name_dob_restrict  # Handles if dob or name empty, or date given later than Time.now
+      if params[:dob].empty? || params[:name].empty? # Overrides 404 error handling
+        flash[:message] = "Name and birth date required."
+      elsif Time.strptime(params["dob"], "%m/%d/%Y").to_date > Time.now.to_date
         flash[:message] = "Date of birth must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}"
       end
     end
