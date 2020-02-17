@@ -16,15 +16,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  # not_found do # Handles ActiveRecord page not found error
-  #   status 404
-  #   flash[:message] = "Page not found."
-  #   if current_user
-  #     redirect "/users/#{current_user.id}"
-  #   else
-  #     redirect "/"
-  #   end
-  # end
+  not_found do # Handles ActiveRecord page not found error
+    status 404
+    flash[:message] = "Page not found."
+    if current_user
+      redirect "/users/#{current_user.id}"
+    else
+      redirect "/"
+    end
+  end
 
   helpers do
     def is_logged_in?
