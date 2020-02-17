@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def no_access # Handles user accessing pet that does not belong to them.
+    def no_pet_access # Handles user accessing pet that does not belong to them.
       if !current_user.pets.include?(Pet.find_by(id: params[:id]))
         flash[:message] = "You are not authorized to access this profile."
         redirect "/users/#{current_user.id}"

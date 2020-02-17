@@ -6,7 +6,6 @@ class PetController < ApplicationController
   get '/pets/new' do
     erb :'pets/new'
   end
-
   post '/pets' do # post pets
     if params[:dob].empty? || params[:name].empty? # Overrides 404 error handling
       flash[:message] = "Name and birth date required."
@@ -24,14 +23,14 @@ class PetController < ApplicationController
     if !current_user
       redirect "/"
     end
-    no_access
+    no_pet_access
     list_pet_vaccinations
     @pet = Pet.find(params[:id])
     erb :'pets/show'
   end
 
   get '/pets/:id/edit' do
-    no_access
+    no_pet_access
     @pet = Pet.find(params[:id])
     erb :'pets/edit'
   end
