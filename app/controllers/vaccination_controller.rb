@@ -15,6 +15,9 @@ class VaccinationController < ApplicationController
     elsif params["date_given"].to_date > Time.now.to_date
       flash[:message] = "Date given must be earlier than #{Time.now.to_date.strftime("%m/%d/%Y")}" # Handles if date given later than Time.now
       redirect "vaccinations/new?current_pet_id=#{params["current_pet"]}"
+    else
+      flash[:message] = "Wrong input. Try again."
+      redirect "vaccinations/new?current_pet_id=#{params["current_pet"]}"
     end
     @vaccination = Vaccination.new(vacc_name: params[:vacc_name], vacc_type: params[:vacc_type], date_given: params[:date_given], notes: params[:notes], frequency: params[:frequency], pet_id: params["current_pet"])
     @vaccination.save
