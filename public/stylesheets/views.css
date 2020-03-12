@@ -49,3 +49,12 @@ div {
 	float: left;
 	font-size: 1.25em;
 }
+.welcome-page {
+	justify-content: space-between;
+}
+.links {
+	margin: 0 auto;
+	max-width: 10vw;
+	border: 1px solid #333;
+	padding: 10px;
+}

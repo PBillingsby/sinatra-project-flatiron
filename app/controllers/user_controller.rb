@@ -11,7 +11,11 @@ class UserController < ApplicationController
       redirect "/users/#{current_user.id}"
     else
       flash[:message] = "Please enter valid username, email and password"
+<<<<<<< HEAD
       redirect "/signup"
+=======
+      redirect "/registrations/new"
+>>>>>>> Change css attributes on views.
     end
   end
 
@@ -28,9 +32,9 @@ class UserController < ApplicationController
       flash[:message] = "Log in details incorrect. Try again."
       redirect "/login"
     end
-    if session[:user_id] == current_user.id # Handle if user is already logged in.
-      redirect "/users/#{current_user.id}"
-    end
+    # if session[:user_id] == current_user.id # Handle if user is already logged in.
+    #   redirect "/users/#{current_user.id}" #Not needed.
+    # end
   end
 
   get '/users/:id' do
